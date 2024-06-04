@@ -1,25 +1,17 @@
-import Task from '../Task/Task';
+import Card from '../Card/Card';
 import './Column.scss'
-
-const Column = () => {
+import { mapOrder } from '../../helpers/helpers';
+const Column = ({column}) => {
+    const cards = mapOrder(column.cards,column.cardOrder,'id')
     return (
         <div className="column">
-        <header>Backlog</header>
-        <ul className='task-list'>
-          <Task/>
-          <li className='task-item'>second</li>
-          <li className='task-item'>third</li>
-          <li className='task-item'>second</li>
-          <li className='task-item'>third</li>
-          <li className='task-item'>second</li>
-          <li className='task-item'>third</li>
-          <li className='task-item'>second</li>
-          <li className='task-item'>third</li>
-          <li className='task-item'>second</li>
-          <li className='task-item'>third</li>
-          <li className='task-item'>second</li>
-          <li className='task-item'>third</li>
-          <li className='task-item'>second</li>
+        <header>{column.title}</header>
+        <ul className='card-list'>
+          {cards && cards.length > 0 && cards.map((card,index) => {
+            return(
+                <Card key={card.id} card={card}/>
+            )
+          })}
         </ul>
         <footer>Add another card</footer>
         </div>
